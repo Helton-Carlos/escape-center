@@ -3,9 +3,9 @@ namespace back_escape_center.Models;
 public class ClientModel
 {
     public int Id { get; set; }
-    public string Nome { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
-    public string Telefone { get; set; } = string.Empty;
-    public DateTime DataNascimento { get; set; }
-    public DateTime DataCadastro { get; set; } = DateTime.Now;
+    public string Phone { get; set; } = string.Empty;
+    public DateTime DateBorn { get; set; }
+    public DateTime createdAt { get; set; } = DateTime.Now;
 }
