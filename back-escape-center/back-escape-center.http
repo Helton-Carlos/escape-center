@@ -1,0 +1,6 @@
+@back_escape_center_HostAddress = http://localhost:5103
+
+GET {{back_escape_center_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
