@@ -16,7 +16,7 @@ public class ServiceController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public IActionResult GetById(Guid id)
     {
         var service = _services.FirstOrDefault(s => s.Id == id);
         if (service == null)
@@ -29,7 +29,7 @@ public class ServiceController : ControllerBase
     [HttpPost]
     public IActionResult Create([FromBody] ServiceModel newService)
     {
-        newService.Id = _services.Count + 1;
+        newService.Id = Guid.NewGuid();
         newService.CreatedAt = DateTime.UtcNow;
 
         _services.Add(newService);
@@ -38,7 +38,7 @@ public class ServiceController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, [FromBody] ServiceModel updatedService)
+    public IActionResult Update(Guid id, [FromBody] ServiceModel updatedService)
     {
         var existingService = _services.FirstOrDefault(s => s.Id == id);
         if (existingService == null)
@@ -50,13 +50,13 @@ public class ServiceController : ControllerBase
         existingService.TypeService = updatedService.TypeService;
         existingService.Budget = updatedService.Budget;
         existingService.Status = updatedService.Status;
-        existingService.GetCar = updatedService.GetCar; 
+        existingService.GetCar = updatedService.GetCar;
 
         return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public IActionResult Delete(Guid id)
     {
         var service = _services.FirstOrDefault(s => s.Id == id);
         if (service == null)
