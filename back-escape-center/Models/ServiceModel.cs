@@ -1,13 +1,17 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace back_escape_center.Models;
 
 public class ServiceModel
 {
     public int Id { get; set; }
-    public int Client { get; set; }
-    public string Email { get; set; } = string.Empty;
-    public string phone { get; set; } = string.Empty;
-    public string dress { get; set; } = string.Empty;
-    public DateTime DateBorn { get; set; }
-    public DateTime createdAt { get; set; } = DateTime.Now;
-    public DateTime getCar { get; set; }
+    [Required]
+    public int ClientId { get; set; }
+    public ClientModel? Client { get; set; }
+    [Required]
+    public string TypeService { get; set; } = string.Empty;
+    public string Budget { get; set; } = string.Empty;
+    public string Status { get; set; } = string.Empty;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? GetCar { get; set; } 
 }
