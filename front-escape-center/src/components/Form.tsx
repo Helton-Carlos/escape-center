@@ -19,7 +19,7 @@ export function Form() {
     toast("Erro ao logar, verifique os campos!")
   }
   return (
-    <form className="bg-gray-800 w-90 px-4 py-4 flex flex-col gap-5 mx-auto" onSubmit={handleSubmit}>
+    <form className="bg-gray-800 w-90 px-4 py-4 flex flex-col gap-5" onSubmit={handleSubmit}>
       <h1 className="text-2xl text-center font-bold mt-2">
         Escape Center
       </h1>
