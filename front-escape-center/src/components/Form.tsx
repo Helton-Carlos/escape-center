@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 export function Form() {
   const [email, setEmail] = useState('');
@@ -11,7 +12,11 @@ export function Form() {
 
     if(email && password) {
       navigate('/'); 
+
+      toast("Bem vindo ao Escape Center!");
     } 
+
+    toast("Erro ao logar, verifique os campos!")
   }
   return (
     <form className="bg-gray-800 w-90 px-4 py-4 flex flex-col gap-5 mx-auto" onSubmit={handleSubmit}>
@@ -56,6 +61,8 @@ export function Form() {
           Cadastrar
         </button>
       </div>
+
+      <ToastContainer />
     </form>  
   )
 }
