@@ -1,10 +1,20 @@
+import { Card } from "@/components/Card";
+import { CardInfo } from "@/utils/Home";
+
 export function Dashboard() {
   return (
     <div>
-      <h1 className="text-2xl">Dashboard</h1>
+      <h1 className="text-2xl my-4">Dashboard</h1>
 
-      <div className="card">
-        adicionando card
+      <div className="flex flex-wrap gap-4">
+        {CardInfo.map((card, index) => (
+          <Card
+            key={index}
+            title={card.title}
+            description={card.description}
+            imageUrl={card.imageUrl}
+          />
+        ))}
       </div>
     </div>
   )

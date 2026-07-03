@@ -10,10 +10,12 @@ function App() {
     <>
       {location.pathname !== '/login' && <Header />}
 
-      <Routes>
+      <div className="p-4">
+        <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      </div>
     </>
   )
 }

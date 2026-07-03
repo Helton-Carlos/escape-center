@@ -11,7 +11,3 @@ body {
   font-family: var(--font-sans);
   box-sizing: border-box;
 }
-
-@utility card {
-  @apply w-40 p-6 rounded-md shadow-sm border border-gray-100;
-}
