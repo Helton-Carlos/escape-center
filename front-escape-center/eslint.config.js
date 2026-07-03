@@ -3,33 +3,48 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import reactPlugin from "eslint-plugin-react"
+import eslintConfigPrettier from "eslint-config-prettier"
 
-export default defineConfig([
+export default tseslint.config(
   { ignores: ["dist", "node_modules"] },
+  
   js.configs.recommended,
   ...tseslint.configs.recommended,
-  globalIgnores(['dist']),
+  
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      react: reactPlugin,
-      "react-hooks": reactHooksPlugin,
+      'react': reactPlugin,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
     },
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
     languageOptions: {
-      globals: globals.browser,
-      ecmaFeatures: { jsx: true },
+      globals: {
+        ...globals.browser,
+      },
+      parserOptions: {
+        ecmaFeatures: { 
+          jsx: true 
+        },
+      },
+    },
+    settings: {
+      react: {
+        version: "19.0",
+      },
     },
     rules: {
       ...reactPlugin.configs.flat.recommended.rules,
-      ...reactHooksPlugin.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      
       "react/react-in-jsx-scope": "off", 
     },
   },
-])
+  eslintConfigPrettier
+);
