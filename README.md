@@ -23,7 +23,7 @@ cd dotnet run
 ```
 
 ```bash
-cd ../
+http://localhost:8080/swagger/index.html
 ```
 
 ```bash

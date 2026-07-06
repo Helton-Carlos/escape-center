@@ -12,8 +12,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.DocumentTitle = "Escape Center API - Documentação");
 }
 
-app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();
