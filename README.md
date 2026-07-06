@@ -9,7 +9,7 @@ Projeto feito loja de reparos automotivos.
 **👇 Follow the steps.**
 
 ```bash
-git git@github.com:Helton-Carlos/escape-center.git
+git clone git@github.com:Helton-Carlos/escape-center.git
 ```
 
 **👇 Init.**
