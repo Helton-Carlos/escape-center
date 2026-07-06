@@ -47,7 +47,7 @@ export function Form() {
     }
   }
   return (
-    <form className="bg-gray-200 w-90 px-4 py-4 flex flex-col gap-5" onSubmit={handleSubmit}>
+    <form className="bg-gray-200 w-96 px-4 py-4 flex flex-col gap-5" onSubmit={handleSubmit}>
       <h1 className="text-2xl text-center font-bold mt-2">
         Escape Center
       </h1>
@@ -68,7 +68,7 @@ export function Form() {
             onChange={(e) => setName(e.target.value)}
             type="text" 
             placeholder="Nome" 
-            className="input mt-2"
+            className="input mt-2 w-full"
           />
         </div>
        )
@@ -84,7 +84,7 @@ export function Form() {
           onChange={(e) => setEmail(e.target.value)}
           type="e-mail" 
           placeholder="e-mail" 
-          className="input mt-2"
+          className="input mt-2 w-full"
         />
       </div>
 
@@ -98,7 +98,7 @@ export function Form() {
           onChange={(e) => setPassword(e.target.value)}
           type="password" 
           placeholder="*******" 
-          className="input mt-2"
+          className="input mt-2 w-full"
         />
       </div>
 

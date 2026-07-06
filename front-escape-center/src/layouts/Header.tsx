@@ -1,35 +1,61 @@
 import { Link } from 'react-router-dom'
 
 export function Header() {
+  const list = [
+    {
+      title: 'Dashboard',
+      to: '/'
+    },
+    {
+      title: 'Cadastrar Cliente',
+      to: '/cadastrar-cliente'
+    },
+    {
+      title: 'Cadastrar Serviço',
+      to: '/cadastrar-servico'
+    },
+    {
+      title: 'Cadastrar Produto',
+      to: '/cadastrar-produto'
+    },
+  ];
+
   return (
     <header className="navbar bg-base-100 shadow-sm">
-      <div className="flex justify-between max-w-6xl mx-auto w-full">
-        <div>
-          <div className="dropdown">
-            <label htmlFor="my-drawer-1" className="btn drawer-button">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
-            </label>
+      <div className="flex justify-between max-w-7xl mx-auto w-full">
+        <div className="dropdown">
+          <label htmlFor="my-drawer-1" className="btn drawer-button">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
+          </label>
 
-            <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
-          
-            <div className="drawer-side">
-              <label 
-                htmlFor="my-drawer-1"
-                aria-label="close sidebar" 
-                className="drawer-overlay"
-              />
+          <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
+        
+          <div className="drawer-side">
+            <label 
+              htmlFor="my-drawer-1"
+              aria-label="close sidebar" 
+              className="drawer-overlay"
+            />
+        
+            <ul className="menu bg-base-200 min-h-full w-80 px-4 pt-8">
+             <li>
+               <Link to="/" className="btn btn-ghost text-xl my-8">Escape Center</Link>
+             </li>
 
-              <ul className="menu bg-base-200 min-h-full w-80 p-4">
-                <li><Link to="/">Dashboard</Link></li>
-                <li><Link to="/login">Login</Link></li>
-              </ul>
-            </div>
+              { list.map((item, index) => (
+                <li className='mb-2' key={index}>
+                  <Link to={item.to}>{item.title}</Link>
+                </li>
+              ))}
+
+              <li className='flex justify-end mt-8'>
+                <Link to="/login" className="btn btn-primary my-8">Login</Link>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div>
-          <Link to="/" className="btn btn-ghost text-xl">Escape Center</Link>
-        </div>
+        <Link to="/" className="btn btn-ghost text-xl">Escape Center</Link>
         
         <div>
           <button className="btn btn-ghost btn-circle">
