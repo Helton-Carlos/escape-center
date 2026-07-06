@@ -47,20 +47,19 @@ export function Form() {
     }
   }
   return (
-    <form className="bg-gray-800 w-90 px-4 py-4 flex flex-col gap-5" onSubmit={handleSubmit}>
+    <form className="bg-gray-200 w-90 px-4 py-4 flex flex-col gap-5" onSubmit={handleSubmit}>
       <h1 className="text-2xl text-center font-bold mt-2">
         Escape Center
       </h1>
 
-      <h3>
+      <h3 className="text-lg text-center font-bold mt-2">
         {register ? "Cadastre-se" : "Login"}
       </h3>
-
 
       {
        register && (
         <div>
-          <label htmlFor="name" className="text-white">
+          <label htmlFor="name">
             Nome
           </label>
 
@@ -76,7 +75,7 @@ export function Form() {
       }
 
       <div>
-        <label htmlFor="email" className="text-white">
+        <label htmlFor="email">
           E-mail
         </label>
 
@@ -90,7 +89,7 @@ export function Form() {
       </div>
 
       <div>
-        <label htmlFor="password" className="text-white">
+        <label htmlFor="password">
           Senha
         </label>
 
@@ -108,7 +107,7 @@ export function Form() {
           {register ? "Cadastrar" : "Login"}
         </button>
 
-        <button className="btn btn-link text-white" type="button" onClick={() => setRegister(!register)}>
+        <button className="btn btn-link" type="button" onClick={() => setRegister(!register)}>
           {register ? "Já tem uma conta? Faça login" : "Não tem uma conta? Cadastre-se"}
         </button>
       </div>

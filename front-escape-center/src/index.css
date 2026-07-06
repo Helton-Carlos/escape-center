@@ -1,8 +1,13 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+  themes: light --default,
+  cupcake;
+}
 
 @theme {
   --font-sans: "Inter", "Geist Sans", system-ui, sans-serif;
+  --color-text: #000000;
 }
 
 body {
@@ -10,4 +15,5 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   box-sizing: border-box;
+  color: var(--color-text); 
 }
