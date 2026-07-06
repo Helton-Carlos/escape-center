@@ -38,6 +38,7 @@ npm install
 npm run dev
 ```
 
-<img width="1347" height="577" alt="image" src="https://github.com/user-attachments/assets/86da1931-9990-4e03-b149-1189bb513d65" />
+<img width="2277" height="900" alt="image" src="https://github.com/user-attachments/assets/125799c9-82d4-4cd4-b860-0ccc88e5f7ef" />
+
 
 
