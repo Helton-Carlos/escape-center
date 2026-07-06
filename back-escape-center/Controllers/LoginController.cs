@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using back_escape_center.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace back_escape_center.Controllers;
 
@@ -7,7 +7,7 @@ namespace back_escape_center.Controllers;
 [Route("api/[controller]")]
 public class LoginController : ControllerBase
 {
-    private static readonly List<RegisterModel> _users = new();
+    private static readonly List<RegisterModel> _users = [];
 
     [HttpPost("register")]
     public IActionResult Register([FromBody] RegisterModel newUser)
@@ -15,7 +15,7 @@ public class LoginController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        if (_users.Any(u => u.Email.Equals(newUser.Email, StringComparison.OrdinalIgnoreCase)))
+        if (_users.Any(item => item.Email.Equals(newUser.Email, StringComparison.OrdinalIgnoreCase)))
             return Conflict(new { message = "Email já cadastrado" });
 
         newUser.Id = Guid.NewGuid();
@@ -37,9 +37,9 @@ public class LoginController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var user = _users.FirstOrDefault(u =>
-            u.Email.Equals(credentials.Email, StringComparison.OrdinalIgnoreCase) &&
-            u.Password == credentials.Password);
+        var user = _users.FirstOrDefault(item =>
+            item.Email.Equals(credentials.Email, StringComparison.OrdinalIgnoreCase) &&
+            item.Password == credentials.Password);
 
         if (user == null)
             return Unauthorized(new { message = "Email ou senha inválidos" });
@@ -55,7 +55,7 @@ public class LoginController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetById(Guid id)
     {
-        var user = _users.FirstOrDefault(u => u.Id == id);
+        var user = _users.FirstOrDefault(item => item.Id == id);
 
         if (user == null)
             return NotFound(new { message = "Usuário não encontrado" });

@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using back_escape_center.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace back_escape_center.Controllers;
 
@@ -7,7 +7,7 @@ namespace back_escape_center.Controllers;
 [Route("api/[controller]")]
 public class ServiceController : ControllerBase
 {
-    private static readonly List<ServiceModel> _services = new();
+    private static readonly List<ServiceModel> _services = [];
 
     [HttpGet]
     public IActionResult GetAll()
@@ -18,7 +18,7 @@ public class ServiceController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetById(Guid id)
     {
-        var service = _services.FirstOrDefault(s => s.Id == id);
+        var service = _services.FirstOrDefault(item => item.Id == id);
         if (service == null)
         {
             return NotFound(new { message = "Service not found." });
@@ -58,7 +58,7 @@ public class ServiceController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(Guid id)
     {
-        var service = _services.FirstOrDefault(s => s.Id == id);
+        var service = _services.FirstOrDefault(item => item.Id == id);
         if (service == null)
         {
             return NotFound(new { message = "Service not found." });
