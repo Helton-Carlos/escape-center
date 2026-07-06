@@ -3,7 +3,7 @@ import { CardInfo } from "@/utils/Home";
 
 export function Dashboard() {
   return (
-    <div>
+    <div className="p-4 max-w-6xl mx-auto w-full">
       <h1 className="text-2xl my-4">Dashboard</h1>
 
       <div className="flex flex-wrap gap-4">
