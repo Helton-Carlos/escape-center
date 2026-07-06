@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import { userService } from "@/services/user";
+
 
 export function Form() {
   const navigate = useNavigate();
@@ -19,13 +21,7 @@ export function Form() {
         return;
       }
 
-      const response = await fetch('http://localhost:3000/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, email, password })
-      });
+      const response = await userService.register({ name, email, password });
 
       if(response.ok) {
         toast.success("Cadastro realizado com sucesso!");
@@ -35,15 +31,20 @@ export function Form() {
       }
     } else {
       if(email && password) {
-        navigate('/'); 
+        const response = await userService.login({ email, password });
 
-        toast("Bem vindo ao Escape Center!");
-      } 
+        if(response.ok) {
+          toast.success("Login realizado com sucesso!");
+          setRegister(false);
 
-      toast("Erro ao logar, verifique os campos!")
+          navigate("/");
+        } else {
+          toast.error("Erro ao fazer login");
+        }
+      } else {
+        toast("Erro ao logar, verifique os campos!");
+      }
     }
-
-    
   }
   return (
     <form className="bg-gray-800 w-90 px-4 py-4 flex flex-col gap-5" onSubmit={handleSubmit}>
