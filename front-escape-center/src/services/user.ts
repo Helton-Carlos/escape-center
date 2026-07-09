@@ -12,7 +12,8 @@ export const userService = {
     return response.data;
   },
 
-   login: async (userData: UserData) => {
+  login: async (userData: UserData) => {
+    console.log(userData);
     const response = await api.post('/users', userData);
     return response.data;
   },

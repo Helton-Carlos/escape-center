@@ -23,7 +23,7 @@ cd dotnet run
 ```
 
 ```bash
-http://localhost:8080/swagger/index.html
+http://localhost:8080/api/swagger/index.html
 ```
 
 ```bash
@@ -39,6 +39,3 @@ npm run dev
 ```
 
 <img width="2277" height="900" alt="image" src="https://github.com/user-attachments/assets/125799c9-82d4-4cd4-b860-0ccc88e5f7ef" />
-
-
-
