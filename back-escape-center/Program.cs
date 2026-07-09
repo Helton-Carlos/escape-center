@@ -1,6 +1,7 @@
+using back_escape_center.Routes;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,8 +25,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("ApiPublic");
 
-app.UseAuthorization();
-
-app.MapControllers();
+app.MapLoginRoutes();
+app.MapServiceRoutes();
 
 app.Run();
