@@ -8,10 +8,12 @@ public static class ServiceRoutes
 {
     public static void MapServiceRoutes(this WebApplication app)
     {
-        app.MapGet("/api/service", async (AppDbContext db) =>
+        var group = app.MapGroup("/api/service");
+
+        group.MapGet("/", async (AppDbContext db) =>
             Results.Ok(await db.Services.ToListAsync()));
 
-        app.MapGet("/api/service/{id}", async (Guid id, AppDbContext db) =>
+        group.MapGet("/{id}", async (Guid id, AppDbContext db) =>
         {
             var service = await db.Services.FindAsync(id);
             if (service == null)
@@ -20,7 +22,7 @@ public static class ServiceRoutes
             return Results.Ok(service);
         });
 
-        app.MapPost("/api/service", async (ServiceModel newService, AppDbContext db) =>
+        group.MapPost("/", async (ServiceModel newService, AppDbContext db) =>
         {
             newService.Id = Guid.NewGuid();
             newService.CreatedAt = DateTime.UtcNow;
@@ -31,7 +33,7 @@ public static class ServiceRoutes
             return Results.Created($"/api/service/{newService.Id}", newService);
         });
 
-        app.MapPut("/api/service/{id}", async (Guid id, ServiceModel updatedService, AppDbContext db) =>
+        group.MapPut("/{id}", async (Guid id, ServiceModel updatedService, AppDbContext db) =>
         {
             var existing = await db.Services.FindAsync(id);
             if (existing == null)
@@ -47,7 +49,7 @@ public static class ServiceRoutes
             return Results.NoContent();
         });
 
-        app.MapDelete("/api/service/{id}", async (Guid id, AppDbContext db) =>
+        group.MapDelete("/{id}", async (Guid id, AppDbContext db) =>
         {
             var service = await db.Services.FindAsync(id);
             if (service == null)

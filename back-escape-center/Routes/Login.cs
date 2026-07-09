@@ -8,7 +8,9 @@ public static class LoginRoutes
 {
     public static void MapLoginRoutes(this WebApplication app)
     {
-        app.MapPost("/api/login/register", async (RegisterModel newUser, AppDbContext db) =>
+        var group = app.MapGroup("/api/login");
+
+        group.MapPost("/register", async (RegisterModel newUser, AppDbContext db) =>
         {
             if (await db.Users.AnyAsync(u => u.Email.ToLower() == newUser.Email.ToLower()))
                 return Results.Conflict(new { message = "Email já cadastrado" });
@@ -27,7 +29,7 @@ public static class LoginRoutes
             });
         });
 
-        app.MapPost("/api/login", async (LoginModel credentials, AppDbContext db) =>
+        group.MapPost("/", async (LoginModel credentials, AppDbContext db) =>
         {
             var user = await db.Users.FirstOrDefaultAsync(u =>
                 u.Email.ToLower() == credentials.Email.ToLower() &&
@@ -44,7 +46,7 @@ public static class LoginRoutes
             });
         });
 
-        app.MapGet("/api/login/{id}", async (Guid id, AppDbContext db) =>
+        group.MapGet("/{id}", async (Guid id, AppDbContext db) =>
         {
             var user = await db.Users.FindAsync(id);
 
