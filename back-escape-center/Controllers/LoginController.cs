@@ -31,7 +31,7 @@ public class LoginController : ControllerBase
         });
     }
 
-    [HttpPost("login")]
+    [HttpPost("")]
     public IActionResult Login([FromBody] LoginModel credentials)
     {
         if (!ModelState.IsValid)

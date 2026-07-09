@@ -13,8 +13,7 @@ export const userService = {
   },
 
   login: async (userData: UserData) => {
-    console.log(userData);
-    const response = await api.post('/users', userData);
+    const response = await api.post('/Login', userData);
     return response.data;
   },
 };

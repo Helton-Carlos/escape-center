@@ -15,25 +15,25 @@ export function Form() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if(register) {
-      if(!name || !email || !password) {
+    if (register) {
+      if (!name || !email || !password) {
         toast.error("Preencha todos os campos");
         return;
       }
 
       const response = await userService.register({ name, email, password });
 
-      if(response.ok) {
+      if (response.ok) {
         toast.success("Cadastro realizado com sucesso!");
         setRegister(false);
       } else {
         toast.error("Erro ao cadastrar usuário");
       }
     } else {
-      if(email && password) {
+      if (email && password) {
         const response = await userService.login({ email, password });
 
-        if(response.ok) {
+        if (response.ok) {
           toast.success("Login realizado com sucesso!");
           setRegister(false);
 
@@ -47,7 +47,7 @@ export function Form() {
     }
   }
   return (
-    <form className="bg-gray-200 w-96 px-4 py-4 flex flex-col gap-5" onSubmit={handleSubmit}>
+    <form className="bg-gray-200 w-lg p-8 flex flex-col gap-5" onSubmit={handleSubmit}>
       <h1 className="text-2xl text-center font-bold mt-2">
         Escape Center
       </h1>
@@ -57,21 +57,21 @@ export function Form() {
       </h3>
 
       {
-       register && (
-        <div>
-          <label htmlFor="name">
-            Nome
-          </label>
+        register && (
+          <div>
+            <label htmlFor="name">
+              Nome
+            </label>
 
-          <input 
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            type="text" 
-            placeholder="Nome" 
-            className="input mt-2 w-full"
-          />
-        </div>
-       )
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              placeholder="Nome"
+              className="input mt-2 w-full"
+            />
+          </div>
+        )
       }
 
       <div>
@@ -79,11 +79,11 @@ export function Form() {
           E-mail
         </label>
 
-        <input 
+        <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          type="e-mail" 
-          placeholder="e-mail" 
+          type="e-mail"
+          placeholder="e-mail"
           className="input mt-2 w-full"
         />
       </div>
@@ -93,11 +93,11 @@ export function Form() {
           Senha
         </label>
 
-        <input 
+        <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          type="password" 
-          placeholder="*******" 
+          type="password"
+          placeholder="*******"
           className="input mt-2 w-full"
         />
       </div>
@@ -113,6 +113,6 @@ export function Form() {
       </div>
 
       <ToastContainer />
-    </form>  
+    </form>
   )
 }
