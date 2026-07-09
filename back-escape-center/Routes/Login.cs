@@ -1,4 +1,6 @@
+using back_escape_center.Data;
 using back_escape_center.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace back_escape_center.Routes;
 
@@ -6,16 +8,16 @@ public static class LoginRoutes
 {
     public static void MapLoginRoutes(this WebApplication app)
     {
-        var users = new List<RegisterModel>();
-
-        app.MapPost("/api/login/register", (RegisterModel newUser) =>
+        app.MapPost("/api/login/register", async (RegisterModel newUser, AppDbContext db) =>
         {
-            if (users.Any(u => u.Email.Equals(newUser.Email, StringComparison.OrdinalIgnoreCase)))
+            if (await db.Users.AnyAsync(u => u.Email.ToLower() == newUser.Email.ToLower()))
                 return Results.Conflict(new { message = "Email já cadastrado" });
 
             newUser.Id = Guid.NewGuid();
             newUser.CreatedAt = DateTime.UtcNow;
-            users.Add(newUser);
+
+            db.Users.Add(newUser);
+            await db.SaveChangesAsync();
 
             return Results.Created($"/api/login/{newUser.Id}", new
             {
@@ -25,10 +27,10 @@ public static class LoginRoutes
             });
         });
 
-        app.MapPost("/api/login", (LoginModel credentials) =>
+        app.MapPost("/api/login", async (LoginModel credentials, AppDbContext db) =>
         {
-            var user = users.FirstOrDefault(u =>
-                u.Email.Equals(credentials.Email, StringComparison.OrdinalIgnoreCase) &&
+            var user = await db.Users.FirstOrDefaultAsync(u =>
+                u.Email.ToLower() == credentials.Email.ToLower() &&
                 u.Password == credentials.Password);
 
             if (user == null)
@@ -42,9 +44,9 @@ public static class LoginRoutes
             });
         });
 
-        app.MapGet("/api/login/{id}", (Guid id) =>
+        app.MapGet("/api/login/{id}", async (Guid id, AppDbContext db) =>
         {
-            var user = users.FirstOrDefault(u => u.Id == id);
+            var user = await db.Users.FindAsync(id);
 
             if (user == null)
                 return Results.NotFound(new { message = "Usuário não encontrado" });
