@@ -22,18 +22,13 @@ namespace back_escape_center.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("back_escape_center.Models.ClientModel", b =>
+            modelBuilder.Entity("back_escape_center.Models.PersonModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DateBorn")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -50,32 +45,12 @@ namespace back_escape_center.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients", (string)null);
-                });
-
-            modelBuilder.Entity("back_escape_center.Models.RegisterModel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Persons", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("back_escape_center.Models.ServiceModel", b =>
@@ -88,8 +63,8 @@ namespace back_escape_center.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -112,6 +87,27 @@ namespace back_escape_center.Migrations
                     b.ToTable("Services", (string)null);
                 });
 
+            modelBuilder.Entity("back_escape_center.Models.ClientModel", b =>
+                {
+                    b.HasBaseType("back_escape_center.Models.PersonModel");
+
+                    b.Property<DateTime?>("DateBorn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.ToTable("Clients", (string)null);
+                });
+
+            modelBuilder.Entity("back_escape_center.Models.RegisterModel", b =>
+                {
+                    b.HasBaseType("back_escape_center.Models.PersonModel");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable("Users", (string)null);
+                });
+
             modelBuilder.Entity("back_escape_center.Models.ServiceModel", b =>
                 {
                     b.HasOne("back_escape_center.Models.ClientModel", "Client")
@@ -121,6 +117,24 @@ namespace back_escape_center.Migrations
                         .IsRequired();
 
                     b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("back_escape_center.Models.ClientModel", b =>
+                {
+                    b.HasOne("back_escape_center.Models.PersonModel", null)
+                        .WithOne()
+                        .HasForeignKey("back_escape_center.Models.ClientModel", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("back_escape_center.Models.RegisterModel", b =>
+                {
+                    b.HasOne("back_escape_center.Models.PersonModel", null)
+                        .WithOne()
+                        .HasForeignKey("back_escape_center.Models.RegisterModel", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
