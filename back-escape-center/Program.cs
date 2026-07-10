@@ -30,6 +30,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("ApiPublic");
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await db.Database.MigrateAsync();
+    await DbSeed.SeedAsync(db);
+}
+
 app.MapLoginRoutes();
 app.MapServiceRoutes();
 

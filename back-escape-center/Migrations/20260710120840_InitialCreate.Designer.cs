@@ -12,7 +12,7 @@ using back_escape_center.Data;
 namespace back_escape_center.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260709234939_InitialCreate")]
+    [Migration("20260710120840_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
