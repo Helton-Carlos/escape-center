@@ -1,4 +1,14 @@
-export function Table({ columns, data }: { columns: string[], data: { id: string, cliente: string, servico: string, status: string }[] }) {
+interface TableProps {
+  columns: string[];
+  data: { 
+    id: string, 
+    cliente: string, 
+    servico: string, 
+    status: string 
+  }[];
+}
+
+export function Table({ columns, data }: TableProps) {
   return (
     <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mt-8">
       <table className="table">
