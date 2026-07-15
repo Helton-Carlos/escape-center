@@ -15,3 +15,20 @@ export const CardInfo = [
     imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLOrKRYrbIpPbwQ2veKjWsfXLHtw5atKm1L39Zph3kWkF7uml2TJXhv0k&s=10"
   }
 ]
+
+export const Columns = ['','Cliente', 'Serviço', 'Status'];
+
+export const Rows = [
+    {
+      id: '1',
+      cliente: 'John Doe',
+      servico: 'Revisão',
+      status: 'Em andamento'
+    },
+    {
+      id: '2',
+      cliente: 'Jane Smith',
+      servico: 'Escapamento',
+      status: 'Concluído'
+    }
+  ]
